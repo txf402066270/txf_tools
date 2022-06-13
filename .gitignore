@@ -9,6 +9,7 @@ LICENSE
 dist/
 build/
 txftools.egg-info/
+.idea
 
 
 # C extensions
