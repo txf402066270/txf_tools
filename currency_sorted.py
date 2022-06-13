@@ -1,6 +1,3 @@
-from collections.abc import Iterable
-
-
 class DictSorted(object):
     """字典排序"""
 

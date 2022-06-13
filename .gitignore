@@ -3,6 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+setup.py
+LICENSE
+.pypirc
+dist/
+build/
+txftools.egg-info/
+
+
 # C extensions
 *.so
 

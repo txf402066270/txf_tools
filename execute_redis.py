@@ -1,5 +1,4 @@
 import redis
-from django_redis import get_redis_connection
 
 REDIS_TIME_OUTER = 3600 * 24 * 365  # 过期时间一年
 
@@ -20,6 +19,7 @@ REDIS_TIME_OUTER = 3600 * 24 * 365  # 过期时间一年
 class ExecutionRedis(object):
     def __init__(self, redis_name=None, redis_host="127.0.0.1", redis_port=6379, redis_db=9):
         if redis_name:
+            from django_redis import get_redis_connection
             self.redis_conn = get_redis_connection('personnel_pool')
         else:
             self.redis_conn = redis.StrictRedis(host=redis_host, port=redis_port, decode_responses=True, db=redis_db)

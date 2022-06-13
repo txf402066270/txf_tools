@@ -14,5 +14,5 @@ setup(name='txftools',  # 名字
       license='NEU',  # 
       packages=find_packages(),  # 默认
       zip_safe=True,  # 默认
-      install_requires=[]  # 需要的包
+      install_requires=['django_redis']  # 需要的包
       )
