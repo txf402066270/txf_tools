@@ -1,3 +1,6 @@
+import copy
+
+
 class DictSorted(object):
     """字典排序"""
 
@@ -93,7 +96,7 @@ class ListOneSorted(object):
     def __init__(self, *args, **kwargs):
         self.lst = args[0]
 
-    def sort_ret(self, desc=True):
+    def sort_ret(self, *args, desc=True):
         self.lst.sort(reverse=desc)
         return self.lst
 
@@ -129,11 +132,11 @@ class SortGeneric(object):
         return cls
 
 
-def txf_sort(carrier, basis, desc=False):
+def txf_sort(carrier, basis=None, desc=False):
     """
     carrier 载体 要排序的数据
-    basis  依据 指定排序的字段
-    desc   降序False 升序True
+    basis   依据 指定排序的字段
+    desc    降序False 升序True
     详细用法见 if __name__ == '__main__' 案例
 
     carrier 要排序的 dict、list、list嵌套dict
@@ -145,7 +148,10 @@ def txf_sort(carrier, basis, desc=False):
         如果carrier是dict 就指定0或者1表示按照key还是values排序
 
     """
-    return SortGeneric(carrier).sort_ret(basis, desc=desc)
+    carrier = copy.deepcopy(carrier)
+    s = SortGeneric(carrier)
+    ret = s.sort_ret(basis, desc=desc)
+    return ret
 
 
 if __name__ == '__main__':
@@ -161,7 +167,7 @@ if __name__ == '__main__':
     order = ('level', 'time')
     d = {1: 3, 5: 0, 0: 4}
     l = [1, 2, 3, 4, 66, 77, 33, 4, 0]
-    print(SortGeneric(lst).sort_ret(order, desc=False))
-    print(SortGeneric(d).sort_ret(1, desc=False))
-    print(SortGeneric(l).sort_ret(desc=False))
-    # print(txf_sort(lst, order))
+
+    print(txf_sort(lst, order, desc=False))
+    print(txf_sort(d, 1, desc=False))
+    print(txf_sort(l, desc=False))

@@ -35,6 +35,15 @@ class DateTimeTypeConversion(object):
         else:
             raise ValueError("时间格式必须为datetime 或者 str(2022-11-11)")
 
+    def str_time_stamp(self, str_time):
+        """str 转 时间戳"""
+        try:
+            str_time = time.strptime(str_time, '%Y-%m-%d %H:%M:%S')
+        except:
+            str_time = time.strptime(str_time, '%Y-%m-%d')
+        print(str_time)
+        return int(time.mktime(str_time))
+
 
 class CustomBasicDateTime(DateTimeTypeConversion):
     """时间工具"""
@@ -66,13 +75,12 @@ class CustomBasicDateTime(DateTimeTypeConversion):
         # 1 int
         self.day = self.this_time.day
         # 星期几(0,6  0代表周1)， 本月共几天  int
-        self.this_week, self.month_len = calendar.monthrange(self.year, self.month)
+        _, self.month_len = calendar.monthrange(self.year, self.month)
+        self.this_week = datetime.date(self.year, self.month, self.day).weekday()
         # 季度
         self.quarter = (self.month - 1) // 3 + 1
         # 字符串时间
         self.str_date = self.this_time.strftime('%Y-%m-%d')
-
-    (int(datetime.date(2014, 8, 15).strftime('%m')) - 1) // 3 + 1
 
     def time_type(self, date_time=None, dtype=None):
         """
@@ -352,12 +360,8 @@ class CustomBasicDateTime(DateTimeTypeConversion):
 
 
 if __name__ == '__main__':
-    # tms = [CustomBasicDateTime().before_after_year(-i)[:4] for i in range(12)]
-    # print(tms)
-    # print(CustomBasicDateTime().range_month(1, 2))
-    # print(CustomBasicDateTime().before_after_year(-1, flg=True))
-    # a = datetime.date(2021, 9, 1)
-    # print(CustomBasicDateTime(a).this_time)
-    s, e = '2015-10-10', '2016-02-07'
-    print(CustomBasicDateTime().range_month_first(s, e))
-    print(CustomBasicDateTime().range_month_end(s, e))
+
+    # c = CustomBasicDateTime(this_time='2022-07-12')
+    # print(c.this_week)
+    pass
+
