@@ -81,6 +81,7 @@ class CustomBasicDateTime(DateTimeTypeConversion):
         self.quarter = (self.month - 1) // 3 + 1
         # 字符串时间
         self.str_date = self.this_time.strftime('%Y-%m-%d')
+        self.str_date_hms = self.this_time.strftime('%Y-%m-%d %H:%M:%S')
 
     def time_type(self, date_time=None, dtype=None):
         """
@@ -361,7 +362,8 @@ class CustomBasicDateTime(DateTimeTypeConversion):
 
 if __name__ == '__main__':
 
-    # c = CustomBasicDateTime(this_time='2022-07-12')
+    c = CustomBasicDateTime(this_time='2022-07-12')
     # print(c.this_week)
+    print(c.str_date_hms)
     pass
 
