@@ -493,6 +493,31 @@ class HtmlFormatData(object):
             return json.dumps(d, indent=4, ensure_ascii=ensure_ascii)
 
 
+def bs64_str(data, out_type='s'):
+    """
+    base64和bytes互相转换
+    data 数据
+    out_type: s:str b:bytes
+
+    out_type=s data type is bytes
+    out_type=b data type is str
+
+    测试
+    data = b'123'
+
+    vs = bs64_str(data, out_type='s')
+    vb = bs64_str(vs, out_type='b')
+    print(vs)  # MTIz
+    print(vb)  # b'123'
+    """
+    import base64
+
+    if out_type == 's':
+        base64_data = base64.b64encode(data)
+        return base64_data.decode()
+    else:
+        return base64.b64decode(data)
+
 
 if __name__ == '__main__':
     # l = [{
@@ -539,3 +564,4 @@ user-agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like
     print(v)
 
     print([{1:3, 5: 5}])
+
